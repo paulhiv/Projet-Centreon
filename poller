@@ -1,0 +1,11 @@
+FROM centos:7
+LABEL VERSION=0.0.1 MAINTAINERS=PAULO&FLAF
+RUN yum update && \
+    yum install -y http://yum.centreon.com/standard/20.10/el7/stable/noarch/RPMS/centreon-release-20.10-2.el7.centos.noarch.rpm \
+    centreon-poller-centreon-engine \
+## service management
+##
+##
+RUN /usr/share/centreon/bin/registerServerTopology.sh -u admin \
+    -t poller -h centreon-engine -n poller
+

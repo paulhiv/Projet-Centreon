@@ -1,0 +1,18 @@
+FROM centos:7
+LABEL VERSION=0.0.1 MAINTAINERS=PAULO&FLAF
+
+#Téléchagement des paquets
+RUN yum update -y
+RUN yum install -y httpd gnutls Net-SNMP openssl PHP Qt RRDtools zlib
+
+RUN yum install -y centos-release-scl \
+    http://yum.centreon.com/standard/20.10/el7/stable/noarch/RPMS/centreon-release-20.10-2.el7.centos.noarch.rpm \
+    centreon-base-config-centreon-engine centreon-widget\*;
+
+## Configuration
+RUN echo "date.timezone = Europe/Paris" >> /etc/opt/rh/rh-php72/php.d/50-centreon.ini
+
+WORKDIR /entry
+COPY entrypoint.sh /bin/entrypoint.sh
+ENTRYPOINT ["entrypoint"]
+

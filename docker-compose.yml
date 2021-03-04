@@ -1,0 +1,80 @@
+version: "3.9"
+
+services:
+  centreon-bdd:
+    image: centreon-bdd:0.0.1
+    ports:
+    - 3306
+    volumes:
+    - ./bdd/mysql /var/lib/mysql
+##?    - swap
+##?    - /var/cache/centreon/backup
+    - /var/log
+    networks:
+    - centreon
+  centreon-poller:
+    depends_on:
+      - centreon-bdd
+    image: centreon-poller:0.0.1
+    ports:
+    - 3306
+    volumes:
+##?    - swap
+    - /var/cache/centreon/backup
+    - /var/log
+    networks:
+    - centreon
+  centreon-engine:
+    depends_on:
+     - centreon-poller
+    image: centreon-engine:0.0.1  
+    ports:
+    - 8080:80
+    - 443:443
+    volumes:
+    - /var/lib/centreon
+##?    - /var/lib/centreon-broker
+    - /var/cache/centreon/backup
+##?    - /var/lib/centreon-broker
+    - /var/lib/centreon
+    - /var/log
+  networks:
+    - centreon
+    - traefik
+###Traefik + Portainer
+  portainer:
+    image: portainer/portainer-ce
+    networks:
+      - traefik
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer-http.entrypoints=web"
+      - "traefik.http.routers.portainer.rule=Host(192.168.1.54)"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+    networks:
+      - traefik
+  traefic:
+    image: traefik:v2.3
+    ports:
+      - 80:80
+      - 443:443
+      - 10443:8080
+    networks:
+      - traefik
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yaml:/traefik.yaml
+      - ./dynamic.yaml:/dynamic.yaml
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.my-site.rule=Host(my-site.com)"
+      - "traefik.http.routers.my-site.middlewares=redirect@file"
+      - "traefik.http.routers.my-site.entrypoints=web"
+      - "traefik.http.routers.my-site.middlewares=auth@file"
+    networks:
+      - traefik
+networks:
+  - centreon
+  - traefik

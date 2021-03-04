@@ -1,0 +1,14 @@
+FROM centos:7
+LABEL VERSION=0.0.1 MAINTAINERS=PAULO&FLAF
+
+#Téléchagement des paquets
+RUN yum update -y
+RUN yum install -y centreon-database
+
+#Configuration de MariaDB
+workdir /bdd
+COPY /bdd-sql/grant.sql .
+RUN mysql -u root -ppassword grant.sql
+
+#Process CMD
+ENTRYPOINT ["mysqld"]-
