@@ -11,4 +11,4 @@ COPY /bdd-sql/grant.sql .
 RUN mysql -u root -ppassword grant.sql
 
 #Process CMD
-ENTRYPOINT ["mysqld"]-
+ENTRYPOINT ["mysqld"]
