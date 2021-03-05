@@ -22,7 +22,7 @@ services:
   centreon-engine:
     depends_on:
      - centreon-poller
-    image: centreon-engine:0.0.1  
+    image: centreon-engine:0.0.1
     ports:
     - 8080:80
     - 443:443

@@ -3,13 +3,14 @@ LABEL VERSION=0.0.1 MAINTAINERS=PAULO&FLAF
 
 #Téléchagement des paquets
 RUN yum update -y
-RUN yum install -y centreon-database expect
+RUN yum install -y centreon-database expect systemd bash
 
 #Configuration de MariaDB
 workdir /bdd
 COPY ./bdd-sql/grant.sql .
-RUN mysql -u root -ppassword grant.sql
-COPY ./entrypointBdd.sh /bin/entrypoint.sh
+RUN mysql -u root -ppassword -f grant.sql
+COPY ./entrypointBdd.sh /bin/entrypoint
+COPY ./registerbdd /bin/registerbdd
 #Process CMD
 CMD ["mysqld"]
 

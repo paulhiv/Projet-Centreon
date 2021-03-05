@@ -15,8 +15,7 @@ RUN yum -y update
 
 RUN yum -y install
 
-RUN yum -y install
-
+RUN yum -y insta                                                                                                  
 RUN wget http://yum.centreon.com/standard/18.10/el7/stable/noarch/RPMS/centreon-release-18.10-2.el7.centos.noarch.rpm \
     -O /tmp/centreon-release-18.10-2.el7.centos.noarch.rpm
 
