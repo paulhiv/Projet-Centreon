@@ -15,13 +15,8 @@ services:
   centreon-poller:
     depends_on:
       - centreon-bdd
-    image: centreon-poller:0.0.1
-    ports:
-    - 3306
-    volumes:
-##?    - swap
-    - /var/cache/centreon/backup
-    - /var/log
+    image: babykaboom/centreon-poller
+    privileged: true
     networks:
     - centreon
   centreon-engine:

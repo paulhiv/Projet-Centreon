@@ -3,7 +3,7 @@ LABEL VERSION=0.0.1 MAINTAINERS=PAULO&FLAF
 
 #Téléchagement des paquets
 RUN yum update -y
-RUN yum install -y httpd gnutls Net-SNMP openssl PHP Qt RRDtools zlib
+RUN yum install -y bash httpd gnutls Net-SNMP openssl PHP Qt RRDtools zlib
 
 RUN yum install -y centos-release-scl \
     http://yum.centreon.com/standard/20.10/el7/stable/noarch/RPMS/centreon-release-20.10-2.el7.centos.noarch.rpm \

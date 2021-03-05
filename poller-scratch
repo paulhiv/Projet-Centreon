@@ -1,0 +1,49 @@
+LABEL org.label-schema.schema-version=1.0 org.label-schema.name=Centas
+CMD ["/bin/bash"]
+ENV container=docker
+MAINTAINER The CentOS Project
+RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] \
+    || rm -f $i; done); rm -f /lib/systemd/system/multi-user.target.wants/*;rm -f /etc/systemd/system/*.wants/*;rm \
+    -f /lib/systemd/system/local-fs.target.wants/*; rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*initctl*; rm -f /lib/systemd/system/basic.target.wants/*; \
+    rm -f /lib/systemd/system/anaconda.target.wants/*;
+VOLUME [/sys/fs/cgroup]
+CMD ["/usr/sbin/init"]
+MAINTAINER Periko Diaz <perikodiaz@gmail.com>
+RUN echo "NETWORKING=yes" >
+RUN yum -y update
+
+RUN yum -y install
+
+RUN yum -y install
+
+RUN wget http://yum.centreon.com/standard/18.10/el7/stable/noarch/RPMS/centreon-release-18.10-2.el7.centos.noarch.rpm \
+    -O /tmp/centreon-release-18.10-2.el7.centos.noarch.rpm
+
+RUN yum -y install
+
+RUN yum -y install
+
+RUN touch /var/log/centreon-engine/retention.dat
+
+RUN git clone https://github.com/centreon/centreon-plugins.git
+
+RUN chmod +x /usr/lib/centreon/plugins/centreon-plugins/centreon_plugins.pl
+
+RUN yum -y install
+
+RUN wget -O /usr/lib/centreon/plugins/check_openmanage
+
+RUN chmod +x /usr/lib/centreon/plugins/check_openmanage
+
+RUN systemctl enable centreon.service;
+
+RUN /usr/bin/ssh-keygen -A
+
+ENV VOLUME=/sys/fs/cgroup:/sys/fs/cgroup:ro
+
+ENV TZ=Europe/Paris
+
+EXPOSE 22
+
+CMD ["/usr/sbin/init"]

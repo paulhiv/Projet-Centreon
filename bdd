@@ -3,12 +3,17 @@ LABEL VERSION=0.0.1 MAINTAINERS=PAULO&FLAF
 
 #Téléchagement des paquets
 RUN yum update -y
-RUN yum install -y centreon-database
+RUN yum install -y centreon-database expect
 
 #Configuration de MariaDB
 workdir /bdd
-COPY /bdd-sql/grant.sql .
+COPY ./bdd-sql/grant.sql .
 RUN mysql -u root -ppassword grant.sql
-
+COPY ./entrypointBdd.sh /bin/entrypoint.sh
 #Process CMD
-ENTRYPOINT ["mysqld"]
+CMD ["mysqld"]
+
+
+ ## dans docker compose
+
+ ## command : [entrypoint]
