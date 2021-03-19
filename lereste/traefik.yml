@@ -27,5 +27,7 @@ entrypoints:
     address: :80
   monitoring:
     address: :9090
+  graphana: 
+    address: :3000
 log:
   level: DEBUG

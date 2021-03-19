@@ -60,7 +60,7 @@ services:
     labels: 
       - "traefik.enable=true"
       - "traefik.http.routers.router-graphana.rule=Host(`graphana.test.xy`)"
-      - "traefik.http.routers.router-graphana.entrypoints=monitoring"
+      - "traefik.http.routers.router-graphana.entrypoints=graphana"
       - "traefik.http.services.router-graphana.loadbalancer.server.port=3000"
     networks: 
       - monitoring
