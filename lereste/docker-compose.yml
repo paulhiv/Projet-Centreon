@@ -1,0 +1,76 @@
+version: "3.9"
+services: 
+  siteweb_1:
+    image: nginx:latest
+    container_name: siteweb_1
+    volumes: 
+      - /opt/siteweb_1:/usr/share/nginx/html:ro
+    labels: 
+      - "traefik.enable=true"
+      - "traefik.http.routers.router-site1.rule=Host(`siteweb_1.test.xy`)"
+      - "traefik.http.routers.router-site1.entrypoints=web"
+      - "traefik.http.services.router-site1.loadbalancer.server.port=80"
+    networks: 
+      - web
+  siteweb_2:
+    image: nginx:latest
+    container_name: siteweb_2
+    volumes: 
+      - /opt/siteweb_2:/usr/share/nginx/html:ro
+    labels: 
+      - "traefik.enable=true"
+      - "traefik.http.routers.router-site2.rule=Host(`siteweb_2.test.xy`)"
+      - "traefik.http.routers.router-site2.entrypoints=web"
+      - "traefik.http.services.router-site2.loadbalancer.server.port=80"
+    networks: 
+      - web
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    command: --configFile /traefik.yaml
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      -  /var/run/docker.sock:/var/run/docker.sock:ro
+      - /root/Projet_Web/traefik.yaml:/traefik.yaml
+    networks: 
+      - web
+  prometheus:
+    image:  prom/prometheus
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes: 
+      - /root/Projet_Web/prometheus.yml:/etc/prometheus/prometheus.yml
+    labels: 
+      - "traefik.enable=true"
+      - "traefik.http.routers.router-prometheus.rule=Host(`prometheus.test.xy`)"
+      - "traefik.http.routers.router-prometheus.entrypoints=monitoring"
+      - "traefik.http.services.router-prometheus.loadbalancer.server.port=9090"
+    networks: 
+      - monitoring
+  grapahana:
+    image: grafana/grafana
+    container_name: graphana
+    ports: 
+      - 3000:3000
+    labels: 
+      - "traefik.enable=true"
+      - "traefik.http.routers.router-graphana.rule=Host(`graphana.test.xy`)"
+      - "traefik.http.routers.router-graphana.entrypoints=graphana"
+      - "traefik.http.services.router-graphana.loadbalancer.server.port=3000"
+    networks: 
+      - monitoring
+networks: 
+  web:
+    name: web
+    driver: bridge
+  traefik:
+    name: traefik
+    driver: bridge
+  monitoring:
+    name: monitoring  
+    driver: bridge
