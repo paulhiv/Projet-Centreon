@@ -3,7 +3,7 @@ providers:
     docker:
       endpoint: "unix:///var/run/docker.sock"
       exposedByDefault: false
-      network: 
+      networks:
         - web
         - monitoring
 api:
@@ -27,7 +27,7 @@ entrypoints:
     address: :80
   monitoring:
     address: :9090
-  graphana: 
+  graphana:
     address: :3000
 log:
   level: DEBUG
