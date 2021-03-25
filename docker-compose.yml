@@ -1,23 +1,29 @@
 version: "3.7"
 services:
   centreon-central:
-    # build from Dockerfile
-    image: paulhiv/centreon-central:0.0.1
+    image: paulhiv/centreon:1.0
+    # enabe cgroups to access to systemd
     privileged: true
+#    command: "/entrypoint.sh"
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+      - "centreon-engine:/usr/share/centreon-engine"
+      - "Centreon-Engine-var-lib:/var/lib/centreon-engine"
+      - "Centreon-Engine-Connector:/usr/lib64/centreon-connector"
+      - "Centreon-Engine-Library:/usr/lib64/centreon-engine"
+      - "Centreon-Plugins:/usr/lib/centreon/plugins/"
     ports:
       - "80:80"
     networks:
       - centreon
-  centreon-database:
-    image: paulhiv/centreon-database:0.0.1
-    privileged: true
-    networks:
-      - centreon
-    ports:
-      - "3306"
-    volumes:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+
+
+
+volumes:
+  centreon-engine:
+  Centreon-Engine-var-lib:
+  Centreon-Engine-Connector:
+  Centreon-Engine-Library:
+  Centreon-Plugins:
 networks:
   centreon:
