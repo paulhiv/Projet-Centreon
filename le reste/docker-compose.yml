@@ -1,5 +1,6 @@
 version: "3.9"
-services: 
+services:
+### Site web derrière le traefik en front
   siteweb_1:
     image: nginx:latest
     container_name: siteweb_1
@@ -24,6 +25,7 @@ services:
       - "traefik.http.services.router-site2.loadbalancer.server.port=80"
     networks: 
       - web
+#### Serveur Reverse Proxy
   traefik:
     image: traefik:latest
     container_name: traefik
@@ -36,6 +38,7 @@ services:
       - /root/Projet_Web/traefik.yaml:/traefik.yaml
     networks: 
       - web
+###Serveur de log
   prometheus:
     image:  prom/prometheus
     container_name: prometheus
@@ -45,25 +48,76 @@ services:
       - --config.file=/etc/prometheus/prometheus.yml
     volumes: 
       - /root/Projet_Web/prometheus/:/etc/prometheus/
-    labels: 
-      - "traefik.enable=true"
-      - "traefik.http.routers.router-prometheus.rule=Host(`prometheus.test.xy`)"
-      - "traefik.http.routers.router-prometheus.entrypoints=monitoring"
-      - "traefik.http.services.router-prometheus.loadbalancer.server.port=9090"
     networks: 
-      - monitoring 
-  grapahana:
+      - monitoring
+  graphana:
     image: grafana/grafana
     container_name: graphana
     ports: 
       - "3000:3000"
-    labels: 
-      - "traefik.enable=true"
-      - "traefik.http.routers.router-graphana.rule=Host(`graphana.test.xy`)"
-      - "traefik.http.routers.router-graphana.entrypoints=graphana"
-      - "traefik.http.services.router-graphana.loadbalancer.server.port=3000"
     networks: 
       - monitoring
+####Supervision Docker
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - monitoring
+  portainer-agent:
+    image: portainer/agent
+    container_name: portainer_agent
+    restart: always
+    ports:
+      - "9001:9001"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+    networks:
+      - monitoring
+####Tickets support
+  glpi:
+    image: diouxx/glpi
+    container_name: glpi
+    ports:
+      - "8090:80"
+    volumes: 
+      - "./glpi:/var/www/html/glpi"
+  mysql:
+    image: mysql:5.7.23
+    container_name: mysql
+    ports:
+      - "3306"
+    environment: 
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=glpi
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+    volumes: 
+      - ./mysql:/var/lib/mysql
+###Centreon
+  centreon-central:
+    image: paulhiv/centreon:1.0
+    container_name: centreon
+    privileged: true
+    command: "/entrypoint.sh"
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+      - "centreon-engine:/usr/share/centreon-engine"
+      - "Centreon-Engine-var-lib:/var/lib/centreon-engine"
+      - "Centreon-Engine-Connector:/usr/lib64/centreon-connector"
+      - "Centreon-Engine-Library:/usr/lib64/centreon-engine"
+      - "Centreon-Plugins:/usr/lib/centreon/plugins/"
+    ports:
+      - "8091:80"
+    networks:
+      - centreon
+####Network pour le SI
 networks: 
   web:
     name: web
@@ -74,3 +128,14 @@ networks:
   monitoring:
     name: monitoring  
     driver: bridge
+  support:
+    name: support
+    driver: bridge
+  centreon:
+###Volumes Centreon
+volumes:
+  centreon-engine:
+  Centreon-Engine-var-lib:
+  Centreon-Engine-Connector:
+  Centreon-Engine-Library:
+  Centreon-Plugins:
