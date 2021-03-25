@@ -1,10 +1,9 @@
-version: '3.9'
+version: "3.7"
 services:
   centreon-central:
     # build from Dockerfile
-    image: centreon-engine:0.0.1
+    image: paulhiv/centreon-central:0.0.1
     privileged: true
-    command: /entrypoint.sh
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
     ports:
@@ -12,7 +11,7 @@ services:
     networks:
       - centreon
   centreon-database:
-    image: centreon-database:0.0.1
+    image: paulhiv/centreon-database:0.0.1
     privileged: true
     networks:
       - centreon
@@ -20,7 +19,5 @@ services:
       - "3306"
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-    command:
-      "/centreon-conf/entrypoint.sh"
 networks:
   centreon:
