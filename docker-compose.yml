@@ -4,7 +4,7 @@ services:
     image: paulhiv/centreon:1.0
     # enabe cgroups to access to systemd
     privileged: true
-#    command: "/entrypoint.sh"
+    command: '/entrypoint.sh start'
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
       - "centreon-engine:/usr/share/centreon-engine"
@@ -13,7 +13,7 @@ services:
       - "Centreon-Engine-Library:/usr/lib64/centreon-engine"
       - "Centreon-Plugins:/usr/lib/centreon/plugins/"
     ports:
-      - "80:80"
+      - "91:80"
     networks:
       - centreon
 

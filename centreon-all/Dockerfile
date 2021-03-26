@@ -17,5 +17,4 @@ rm -f /lib/systemd/system/basic.target.wants/*;\
 rm -f /lib/systemd/system/anaconda.target.wants/*;
 RUN echo "date.timezone = Europe/Paris" >> /etc/opt/rh/rh-php72/php.d/50-centreon.ini
 VOLUME [ "/sys/fs/cgroup" ]
-ENTRYPOINT ["/bin/sh", "-c"]
-CMD ["/usr/sbin/init"]
+ENTRYPOINT ["/entrypoint.sh"]
