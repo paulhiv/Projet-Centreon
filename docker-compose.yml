@@ -4,26 +4,26 @@ services:
   siteweb_1:
     image: nginx:latest
     container_name: siteweb_1
-    volumes: 
+    volumes:
       - /opt/siteweb_1:/usr/share/nginx/html:ro
-    labels: 
+    labels:
       - "traefik.enable=true"
       - "traefik.http.routers.router-site1.rule=Host(`siteweb_1.test.xy`)"
       - "traefik.http.routers.router-site1.entrypoints=web"
       - "traefik.http.services.router-site1.loadbalancer.server.port=80"
-    networks: 
+    networks:
       - web
   siteweb_2:
     image: nginx:latest
     container_name: siteweb_2
-    volumes: 
+    volumes:
       - /opt/siteweb_2:/usr/share/nginx/html:ro
-    labels: 
+    labels:
       - "traefik.enable=true"
       - "traefik.http.routers.router-site2.rule=Host(`siteweb_2.test.xy`)"
       - "traefik.http.routers.router-site2.entrypoints=web"
       - "traefik.http.services.router-site2.loadbalancer.server.port=80"
-    networks: 
+    networks:
       - web
 #### Serveur Reverse Proxy
   traefik:
@@ -36,7 +36,7 @@ services:
     volumes:
       -  /var/run/docker.sock:/var/run/docker.sock:ro
       - /root/Projet_Web/traefik.yaml:/traefik.yaml
-    networks: 
+    networks:
       - web
 ###Serveur de log
   prometheus:
@@ -46,16 +46,16 @@ services:
       - "9090:9090"
     command:
       - --config.file=/etc/prometheus/prometheus.yml
-    volumes: 
+    volumes:
       - /root/Projet_Web/prometheus/:/etc/prometheus/
-    networks: 
+    networks:
       - monitoring
   graphana:
     image: grafana/grafana
     container_name: graphana
-    ports: 
+    ports:
       - "3000:3000"
-    networks: 
+    networks:
       - monitoring
 ####Supervision Docker
   portainer:
@@ -87,20 +87,20 @@ services:
     container_name: glpi
     ports:
       - "8090:80"
-    volumes: 
+    volumes:
       - "./glpi:/var/www/html/glpi"
   mysql:
     image: mysql:5.7.23
     container_name: mysql
     ports:
       - "3306"
-    environment: 
+    environment:
       - MYSQL_ROOT_PASSWORD=test
       - MYSQL_DATABASE=glpi
       - MYSQL_USER=test
       - MYSQL_PASSWORD=test
-    volumes: 
-      - ./mysql:/var/lib/mysql
+    volumes:
+      - ./mysql-glpi:/var/lib/mysql
 ###Centreon
   centreon-central:
     image: paulhiv/centreon:1.0
@@ -108,18 +108,18 @@ services:
     privileged: true
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-      - "centreon-engine:/usr/share/centreon-engine"
-      - "Centreon-Engine-var-lib:/var/lib/centreon-engine"
-      - "Centreon-Engine-Connector:/usr/lib64/centreon-connector"
-      - "Centreon-Engine-Library:/usr/lib64/centreon-engine"
-      - "Centreon-Plugins:/usr/lib/centreon/plugins/"
+      - "./centreon-engine:/usr/share/centreon-engine"
+      - "./Centreon-Engine-var-lib:/var/lib/centreon-engine"
+      - "./Centreon-Engine-Connector:/usr/lib64/centreon-connector"
+      - "./Centreon-Engine-Library:/usr/lib64/centreon-engine"
+      - "./Centreon-Plugins:/usr/lib/centreon/plugins/"
     ports:
       - "8091:80"
     networks:
       - centreon
       - web
 ####Network pour le SI
-networks: 
+networks:
   web:
     name: web
     driver: bridge
@@ -127,7 +127,7 @@ networks:
     name: traefik
     driver: bridge
   monitoring:
-    name: monitoring  
+    name: monitoring
     driver: bridge
   support:
     name: support

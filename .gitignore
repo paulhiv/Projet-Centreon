@@ -1,1 +1,9 @@
 .vscode/
+glpi/
+mysql-glpi/
+centreon-engine/
+Centreon-Engine-Connector/
+Centreon-Engine-var-lib/
+Centreon-Engine-Library/
+Centreon-Plugins/
+prometheus/
