@@ -1,6 +1,6 @@
 # Infrastucture informatique pour une petite entreprise
 
-- Ce projet a pour but de monter une petite infrastructure supervisée et conteneurisée idéale pour une startup
+- Ce projet a pour but de monter une petite infrastructure supervisée et conteneurisée idéale pour une startup.
 
 - Elle contient plusieurs services comme:
     - Un service de ticket informatique (glpi + Mysql)
@@ -65,12 +65,12 @@ Redirige les services web vers:
 
 #### portainer
 
-Il permet la gestion de docker via une interface graphique sur localhost:9000
+Il permet la gestion de docker via une interface graphique sur localhost:9000.
 
 #### prometeus/graphana
 
 Il supervise le traefik ainsi que la base de donnée de GLPI.
-Son fichier de configuration se trouve [ici](./prometheus/prometheus.yml)
+Son fichier de configuration se trouve [ici](./prometheus/prometheus.yml).
 
 ### Installation
 
