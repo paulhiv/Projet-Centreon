@@ -1,7 +1,8 @@
 # Infrastucture informatique pour une petite entreprise
-Ce projet a pour but de monter une petite infrastructure supervisée et conteneurisée idéale pour une startup
 
-Elle contient plusieurs services comme:
+- Ce projet a pour but de monter une petite infrastructure supervisée et conteneurisée idéale pour une startup
+
+- Elle contient plusieurs services comme:
     - Un service de ticket informatique (glpi + Mysql)
     - Un serveur de log pour optimiser les configurations futures
     - 2 sites web NGINX en tant qu'exemple de service de production
