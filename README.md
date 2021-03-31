@@ -1,4 +1,4 @@
-# infrasture informatique pour une petite infrastructure
+# infrasture informatique pour une petite entreprise
 ce projet a pour but de monter une petite infrastructure monitoré et conteneurisé idéale pour une startup
 
 Elle contient plusieurs services comme:
