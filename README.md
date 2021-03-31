@@ -1,5 +1,4 @@
-# containerised startup infrastructure proof of concept
-
+# infrasture informatique pour une petite infrastructure
 ce projet a pour but de monter une petite infrastructure monitoré et conteneurisé idéale pour une startup
 
 Elle contient plusieurs services comme:
