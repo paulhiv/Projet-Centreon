@@ -61,7 +61,7 @@ SOFTWARE
 
 - Redirige les services web vers:
     - http://siteweb_1.test.xy
-    - http://siteweb_1.test.xy
+    - http://siteweb_2.test.xy
 
 #### Portainer
 
