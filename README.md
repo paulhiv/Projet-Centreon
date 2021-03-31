@@ -10,15 +10,17 @@ Elle contient plusieurs services comme:
 
 ## Table des Matières
 
-1. [Pré-requis](###Pré-requis)
-2. [services](###services)
-    1. [centreon](####centreon)
-    2. [GLPI](####GLPI)
-    3. [Traefik](####Traefik)
-    4. [portainer](####portainer)
-    5 [prometeus/graphana](####prometeus/graphana)
-3. [Installation](###Installation-example)
-   1. [Vérification](####Vérification)
+- [infrasture informatique pour une petite entreprise](#infrasture-informatique-pour-une-petite-entreprise)
+  - [Table des Matières](#table-des-matières)
+    - [Pré-requis](#pré-requis)
+    - [services](#services)
+      - [centreon](#centreon)
+      - [GLPI](#glpi)
+      - [Traefik](#traefik)
+      - [portainer](#portainer)
+      - [prometeus/graphana](#prometeusgraphana)
+    - [Installation](#installation)
+      - [Vérification](#vérification)
 
 ### Pré-requis
 
