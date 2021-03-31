@@ -15,7 +15,7 @@
   - [Table des Matières](#table-des-matières)
     - [Pré-requis](#pré-requis)
     - [Services](#services)
-      - [centreon](#centreon)
+      - [Centreon](#centreon)
       - [GLPI](#glpi)
       - [Traefik](#traefik)
       - [Portainer](#portainer)
@@ -39,7 +39,7 @@ SOFTWARE
 
 ### Services
 
-#### centreon
+#### Centreon
 
 - Centreon comporte des dossiers nécessaires à sa configuration:
     - Centreon-engine
@@ -52,14 +52,14 @@ SOFTWARE
 
 #### GLPI
 
-GLPI contient des dossiers de configuration:
+- GLPI contient des dossiers de configuration:
     - mysql-glpi
     - glpi
 
 
 #### Traefik
 
-Redirige les services web vers:
+- Redirige les services web vers:
     - http://siteweb_1.test.xy
     - http://siteweb_1.test.xy
 
