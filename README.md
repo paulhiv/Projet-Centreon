@@ -1,4 +1,4 @@
-# contanerised small business infrastructure
+# Containerised small business infrastructure
 
 
 
@@ -14,7 +14,7 @@ This project contains:
 
 ## Summary
 
-- [contanerised small business infrastructure](#contanerised-small-business-infrastructure)
+- [Containerised small business infrastructure](#containerised-small-business-infrastructure)
   - [Summary](#summary)
   - [Requirements](#requirements)
     - [Services](#services)
@@ -134,7 +134,7 @@ Français:
 
 ## Table des Matières
 
-- [contanerised small business infrastructure](#contanerised-small-business-infrastructure)
+- [Containerised small business infrastructure](#containerised-small-business-infrastructure)
   - [Summary](#summary)
   - [Requirements](#requirements)
     - [Services](#services)
