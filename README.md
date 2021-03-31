@@ -1,4 +1,4 @@
-# infrasture informatique pour une petite entreprise
+# infrastucture informatique pour une petite entreprise
 ce projet a pour but de monter une petite infrastructure monitoré et conteneurisé idéale pour une startup
 
 Elle contient plusieurs services comme:
@@ -10,7 +10,7 @@ Elle contient plusieurs services comme:
 
 ## Table des Matières
 
-- [infrasture informatique pour une petite entreprise](#infrasture-informatique-pour-une-petite-entreprise)
+- [infrastucture informatique pour une petite entreprise](#infrastucture-informatique-pour-une-petite-entreprise)
   - [Table des Matières](#table-des-matières)
     - [Pré-requis](#pré-requis)
     - [services](#services)
