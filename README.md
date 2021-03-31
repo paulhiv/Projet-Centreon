@@ -12,13 +12,13 @@ Elle contient plusieurs services comme:
 
 1. [Pré-requis](###Pré-requis)
 2. [services](###services)
-2.1 [centreon](####centreon)
-2.2 [GLPI](####GLPI)
-2.3 [Traefik](####Traefik)
-2.4 [portainer](####portainer)
-2.5 [prometeus/graphana](####prometeus/graphana)
+    1. [centreon](####centreon)
+    2. [GLPI](####GLPI)
+    3. [Traefik](####Traefik)
+    4. [portainer](####portainer)
+    5 [prometeus/graphana](####prometeus/graphana)
 3. [Installation](###Installation-example)
-3.1 [Vérification](####Vérification)
+   1. [Vérification](####Vérification)
 
 ### Pré-requis
 
