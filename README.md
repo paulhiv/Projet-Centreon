@@ -3,23 +3,23 @@
 - Ce projet a pour but de monter une petite infrastructure supervisée et conteneurisée idéale pour une startup.
 
 - Elle contient plusieurs services comme:
-    - Un service de ticket informatique (glpi + Mysql)
-    - Un serveur de log pour optimiser les configurations futures
-    - 2 sites web NGINX en tant qu'exemple de service de production
-    - Un reverse proxy afin de limiter les point d'accès réseau au public aux sites web
-    - Un serveur Centreon afin de superviser l'ensemble du parc informatique
+    - Un service de ticket informatique (glpi + Mysql).
+    - Un serveur de log pour optimiser les configurations futures.
+    - 2 sites web NGINX en tant qu'exemple de service de production.
+    - Un reverse proxy afin de limiter les point d'accès réseau au public aux sites web.
+    - Un serveur Centreon afin de superviser l'ensemble du parc informatique.
 
 ## Table des Matières
 
 - [Infrastucture informatique pour une petite entreprise](#infrastucture-informatique-pour-une-petite-entreprise)
   - [Table des Matières](#table-des-matières)
     - [Pré-requis](#pré-requis)
-    - [services](#services)
+    - [Services](#services)
       - [centreon](#centreon)
       - [GLPI](#glpi)
       - [Traefik](#traefik)
-      - [portainer](#portainer)
-      - [prometeus/graphana](#prometeusgraphana)
+      - [Portainer](#portainer)
+      - [Prometeus/Graphana](#prometeusgraphana)
     - [Installation](#installation)
       - [Vérification](#vérification)
 
@@ -37,12 +37,12 @@ SOFTWARE
 - Docker version 20.10.5
 - docker-compose version 1.28.5
 
-### services
+### Services
 
 #### centreon
 
-Centreon comporte des dossiers nécessaires à sa configuration:
-    - centreon-engine
+- Centreon comporte des dossiers nécessaires à sa configuration:
+    - Centreon-engine
     - Centreon-Engine-var-lib
     - Centreon-Engine-Connector
     - Centreon-Engine-Library
@@ -63,11 +63,11 @@ Redirige les services web vers:
     - http://siteweb_1.test.xy
     - http://siteweb_1.test.xy
 
-#### portainer
+#### Portainer
 
 Il permet la gestion de docker via une interface graphique sur localhost:9000.
 
-#### prometeus/graphana
+#### Prometeus/Graphana
 
 Il supervise le traefik ainsi que la base de donnée de GLPI.
 Son fichier de configuration se trouve [ici](./prometheus/prometheus.yml).
