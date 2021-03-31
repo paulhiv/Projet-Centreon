@@ -1,0 +1,32 @@
+# ./traefik.yaml
+providers:
+    docker:
+      endpoint: "unix:///var/run/docker.sock"
+      exposedByDefault: false
+      network:
+        - monitoring
+api:
+  insecure: true
+http:
+  routers:
+    router-site1:
+      entrypoints:
+        - web
+    router-site2:
+      entrypoints:
+        - web
+    router-prometheus:
+      entrypoints:
+        - monitoring
+    router-graphana:
+      entrypoints:
+        - monitoring
+entrypoints:
+  web:
+    address: :80
+  monitoring:
+    address: :9090
+  graphana:
+    address: :3000
+log:
+  level: DEBUG
