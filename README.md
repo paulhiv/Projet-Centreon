@@ -1,5 +1,8 @@
 # Infrastucture informatique pour une petite entreprise
 
+
+Français:
+
 - Ce projet a pour but de monter une petite infrastructure supervisée et conteneurisée idéale pour une startup.
 
 - Elle contient plusieurs services comme:
